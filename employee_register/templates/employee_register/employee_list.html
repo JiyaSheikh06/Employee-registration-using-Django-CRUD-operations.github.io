@@ -1,0 +1,44 @@
+{% extends 'employee_register/base.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static '/styles/base.css' %}">
+{% block content %}
+<div class="table-responsive">
+    <table class="table table-borderless tablecolor">
+        <thead class="border-bottom font-weight-bold table-heading ">
+            <tr>
+                <th>Full Name</th>
+                <th> Mobile</th>
+                <th>Position</th>
+                <th> 
+                    <a href="{% url 'employee_insert' %}" class="btn btn-outline-success smallbutton">
+                        {% comment %} <i class="far fa-plus"></i>  {% endcomment %}
+                        Add New
+                    </a>
+                </th> 
+            </tr>
+        </thead>
+        </div>
+        <tbody>
+            {% for employee in employee_list %}
+                <tr>
+                    <td>{{employee.fullname}} </td>
+                    <td>{{employee.mobile}} </td>
+                    <td>{{employee.position}} </td>
+                    <td class="flex">
+                        <a href="{% url 'employee_update' employee.id %} " class="btn d-inline px-0 smallbutton sm-update">
+                                {% comment %} <i class="far fa-edit fa-lg"></i> {% endcomment %}
+                            update
+                        </a>
+                        <form action="{% url 'employee_delete' employee.id %}" class="d-inline" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn bg-light smallbutton sm-delete">
+                                Delete
+                            </button>    
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

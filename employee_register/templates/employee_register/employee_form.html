@@ -1,0 +1,33 @@
+{% extends 'employee_register/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form action="" method="post" autocomplete="off">
+    {%csrf_token%}
+    {% comment %} {{ form|crispy }} {% endcomment %}
+    {{form.fullname|as_crispy_field}}
+    {{form.mobile|as_crispy_field}}
+    <div class="row">
+        <div class="col-md-4">
+            {{form.emp_code|as_crispy_field}}
+        </div>
+        <div class="col-md-8">
+            {{form.position|as_crispy_field}}
+        </div>
+    </div>
+    <div class="row btn-size">
+        <div class="col-md-8">
+            <button type="submit" class="btn btn-block bg-light submit mb-2">
+                <i class="fas fa-database"></i>
+                Submit
+            </button>
+        </div>
+        <div class="col-md-4">
+            <a href="{%url 'employee_list'%}" class="btn btn-secondary btn-block">
+                <i class="fas fas-stream"></i> Back to List
+            </a>
+        </div>
+    </div>
+
+</form>
+{% endblock content %}
